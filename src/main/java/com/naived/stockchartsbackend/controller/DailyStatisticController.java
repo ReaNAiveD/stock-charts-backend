@@ -25,8 +25,13 @@ public class DailyStatisticController {
     }
 
     @GetMapping("/latest")
-    public ResultVO getLatest(@RequestParam("ts_code")String tsCode){
+    public ResultVO getLatest(@RequestParam("tscode")String tsCode){
         return ResultVO.SUCCESS(dailyStatisticService.getLatest(tsCode));
+    }
+
+    @GetMapping("/average")
+    public ResultVO getAverage(@RequestParam("tscode")String tsCode){
+        return ResultVO.SUCCESS(dailyStatisticService.getAverage(tsCode));
     }
 
 }
