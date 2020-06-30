@@ -16,14 +16,17 @@ public class DailyStatisticController {
     @GetMapping("/statistic")
     public ResultVO getStatistic(@RequestParam("tscode")String tsCode, @RequestParam("pagesize")int pageSize,
                                  @RequestParam("offset")int offset){
-        System.out.println(tsCode);
         return ResultVO.SUCCESS(dailyStatisticService.getDaily(tsCode, pageSize, offset * pageSize));
     }
 
     @GetMapping("/count")
     public ResultVO getCount(@RequestParam("tscode")String tsCode){
-        System.out.println(tsCode);
         return ResultVO.SUCCESS(dailyStatisticService.getDailyCount(tsCode));
+    }
+
+    @GetMapping("/latest")
+    public ResultVO getLatest(@RequestParam("ts_code")String tsCode){
+        return ResultVO.SUCCESS(dailyStatisticService.getLatest(tsCode));
     }
 
 }

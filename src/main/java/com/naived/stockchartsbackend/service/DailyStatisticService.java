@@ -10,4 +10,6 @@ public interface DailyStatisticService {
 
     public int getDailyCount(String tsCode);
 
+    public DailyBasic getLatest(String tsCode);
+
 }

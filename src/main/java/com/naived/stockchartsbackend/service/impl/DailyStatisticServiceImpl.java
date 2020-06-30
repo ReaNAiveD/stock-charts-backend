@@ -40,4 +40,15 @@ public class DailyStatisticServiceImpl implements DailyStatisticService {
         query.addCriteria(Criteria.where("ts_code").is(tsCode));
         return (int)mongoTemplate.count(query, DailyBasic.class);
     }
+
+    @Override
+    public DailyBasic getLatest(String tsCode) {
+        Sort sort = Sort.by(Sort.Order.desc("trade_date"));
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("ts_code").is(tsCode)),
+                Aggregation.sort(sort),
+                Aggregation.limit(1)
+        );
+        return mongoTemplate.aggregate(aggregation, "daily_basic", DailyBasic.class).getMappedResults().get(0);
+    }
 }
